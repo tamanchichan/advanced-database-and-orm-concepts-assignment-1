@@ -34,7 +34,7 @@ namespace LaptopStoreRefactorDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("LaptopStoreRefactorDb.Model.Laptop", b =>
@@ -63,7 +63,7 @@ namespace LaptopStoreRefactorDb.Migrations
 
                     b.HasIndex("BrandId1");
 
-                    b.ToTable("Laptops");
+                    b.ToTable("Laptops", (string)null);
                 });
 
             modelBuilder.Entity("LaptopStoreRefactorDb.Model.LaptopAndStore", b =>
@@ -93,7 +93,7 @@ namespace LaptopStoreRefactorDb.Migrations
 
                     b.HasIndex("StoreId1");
 
-                    b.ToTable("LaptopsAndStores");
+                    b.ToTable("LaptopsAndStores", (string)null);
                 });
 
             modelBuilder.Entity("LaptopStoreRefactorDb.Model.Store", b =>
@@ -115,7 +115,7 @@ namespace LaptopStoreRefactorDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stores");
+                    b.ToTable("Stores", (string)null);
                 });
 
             modelBuilder.Entity("LaptopStoreRefactorDb.Model.Laptop", b =>
