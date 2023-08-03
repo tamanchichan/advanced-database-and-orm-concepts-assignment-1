@@ -25,6 +25,8 @@ namespace LaptopStoreRefactorDb.Model
             "Laptop model name must be at least three characters in length."
             );
         }
+
+        _model = value;
       }
     }
 
