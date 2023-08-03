@@ -4,7 +4,10 @@ namespace LaptopStoreRefactorDb.Model
 {
   public class Laptop
   {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
+
+    public int BrandId { get; set; }
+    public Brand Brand { get; set; }
 
     private string _model;
     public string Model
@@ -45,8 +48,8 @@ namespace LaptopStoreRefactorDb.Model
 
     public LaptopCondition Condition { get; set; }
 
-    public int BrandId { get; set; }
-    public Brand Brand { get; set; }
+    public HashSet<LaptopAndStore> LaptopsAndStores { get; set; } = 
+      new HashSet<LaptopAndStore>();
   }
 
   public enum LaptopCondition
