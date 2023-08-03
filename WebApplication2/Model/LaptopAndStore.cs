@@ -2,12 +2,10 @@
 {
   public class LaptopAndStore
   {
-    public Guid Id { get; set; }
-
-    public int LaptopId { get; set; }
+    public Guid LaptopId { get; set; }
     public Laptop Laptop { get; set; }
 
-    public int StoreId { get; set; }
+    public Guid StoreId { get; set; }
     public Store Store { get; set; }
 
     public int Quantity { get; set; }

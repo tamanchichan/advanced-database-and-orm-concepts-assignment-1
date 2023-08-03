@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreRefactorDb.Migrations
 {
     [DbContext(typeof(LaptopStoreRefactor))]
-    [Migration("20230803163313_Initial")]
+    [Migration("20230803191732_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,10 +45,7 @@ namespace LaptopStoreRefactorDb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("BrandId1")
+                    b.Property<Guid>("BrandId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Condition")
@@ -63,37 +60,25 @@ namespace LaptopStoreRefactorDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandId1");
+                    b.HasIndex("BrandId");
 
                     b.ToTable("Laptops");
                 });
 
             modelBuilder.Entity("LaptopStoreRefactorDb.Model.LaptopAndStore", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("StoreId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("LaptopId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("LaptopId1")
+                    b.Property<Guid>("LaptopId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
+                    b.HasKey("StoreId", "LaptopId");
 
-                    b.Property<Guid>("StoreId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LaptopId1");
-
-                    b.HasIndex("StoreId1");
+                    b.HasIndex("LaptopId");
 
                     b.ToTable("LaptopsAndStores");
                 });
@@ -123,8 +108,8 @@ namespace LaptopStoreRefactorDb.Migrations
             modelBuilder.Entity("LaptopStoreRefactorDb.Model.Laptop", b =>
                 {
                     b.HasOne("LaptopStoreRefactorDb.Model.Brand", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandId1")
+                        .WithMany("Laptops")
+                        .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -135,19 +120,24 @@ namespace LaptopStoreRefactorDb.Migrations
                 {
                     b.HasOne("LaptopStoreRefactorDb.Model.Laptop", "Laptop")
                         .WithMany("LaptopsAndStores")
-                        .HasForeignKey("LaptopId1")
+                        .HasForeignKey("LaptopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LaptopStoreRefactorDb.Model.Store", "Store")
                         .WithMany("LaptopsAndStores")
-                        .HasForeignKey("StoreId1")
+                        .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Laptop");
 
                     b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("LaptopStoreRefactorDb.Model.Brand", b =>
+                {
+                    b.Navigation("Laptops");
                 });
 
             modelBuilder.Entity("LaptopStoreRefactorDb.Model.Laptop", b =>

@@ -9,7 +9,17 @@ namespace LaptopStoreRefactorDb.Data
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+      modelBuilder.Entity<Laptop>()
+        .HasOne(l => l.Brand)
+        .WithMany(b => b.Laptops)
+        .HasForeignKey(l => l.BrandId);
 
+      modelBuilder.Entity<LaptopAndStore>()
+        .HasKey(lp => new
+        {
+          lp.StoreId,
+          lp.LaptopId
+        });
     }
 
     public DbSet<Brand> Brands { get; set; } = null!;

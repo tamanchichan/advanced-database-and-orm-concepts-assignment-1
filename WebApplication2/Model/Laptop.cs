@@ -6,7 +6,7 @@ namespace LaptopStoreRefactorDb.Model
   {
     public Guid Id { get; set; }
 
-    public int BrandId { get; set; }
+    public Guid BrandId { get; set; }
     public Brand Brand { get; set; }
 
     private string _model;

@@ -40,8 +40,7 @@ namespace LaptopStoreRefactorDb.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BrandId = table.Column<int>(type: "int", nullable: false),
-                    BrandId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Condition = table.Column<int>(type: "int", nullable: false)
@@ -50,8 +49,8 @@ namespace LaptopStoreRefactorDb.Migrations
                 {
                     table.PrimaryKey("PK_Laptops", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Laptops_Brands_BrandId1",
-                        column: x => x.BrandId1,
+                        name: "FK_Laptops_Brands_BrandId",
+                        column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -61,44 +60,36 @@ namespace LaptopStoreRefactorDb.Migrations
                 name: "LaptopsAndStores",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LaptopId = table.Column<int>(type: "int", nullable: false),
-                    LaptopId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StoreId = table.Column<int>(type: "int", nullable: false),
-                    StoreId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LaptopId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StoreId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LaptopsAndStores", x => x.Id);
+                    table.PrimaryKey("PK_LaptopsAndStores", x => new { x.StoreId, x.LaptopId });
                     table.ForeignKey(
-                        name: "FK_LaptopsAndStores_Laptops_LaptopId1",
-                        column: x => x.LaptopId1,
+                        name: "FK_LaptopsAndStores_Laptops_LaptopId",
+                        column: x => x.LaptopId,
                         principalTable: "Laptops",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LaptopsAndStores_Stores_StoreId1",
-                        column: x => x.StoreId1,
+                        name: "FK_LaptopsAndStores_Stores_StoreId",
+                        column: x => x.StoreId,
                         principalTable: "Stores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Laptops_BrandId1",
+                name: "IX_Laptops_BrandId",
                 table: "Laptops",
-                column: "BrandId1");
+                column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LaptopsAndStores_LaptopId1",
+                name: "IX_LaptopsAndStores_LaptopId",
                 table: "LaptopsAndStores",
-                column: "LaptopId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LaptopsAndStores_StoreId1",
-                table: "LaptopsAndStores",
-                column: "StoreId1");
+                column: "LaptopId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

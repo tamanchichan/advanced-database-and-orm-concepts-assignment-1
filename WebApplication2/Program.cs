@@ -26,4 +26,16 @@ using (IServiceScope scope = app.Services.CreateScope())
   await SeedData.Initialize(services);
 }
 
+app.MapGet("/laptops/search", (LaptopStoreRefactor db) =>
+{
+  try
+  {
+    return Results.Ok(db.Laptops.ToHashSet());
+  }
+  catch (Exception ex)
+  {
+    return Results.Problem(ex.Message);
+  }
+});
+
 app.Run();

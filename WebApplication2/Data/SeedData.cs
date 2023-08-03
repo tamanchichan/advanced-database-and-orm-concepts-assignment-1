@@ -174,7 +174,6 @@ namespace LaptopStoreRefactorDb.Data
       // Laptop And Store
       LaptopAndStore lsOne = new LaptopAndStore()
       {
-        Id = Guid.NewGuid(),
         Laptop = laptopOne,
         Store = storeOne,
         Quantity = 10
@@ -182,7 +181,6 @@ namespace LaptopStoreRefactorDb.Data
 
       LaptopAndStore lsTwo = new LaptopAndStore()
       {
-        Id = Guid.NewGuid(),
         Laptop = laptopTwo,
         Store = storeOne,
         Quantity = 5
@@ -190,7 +188,6 @@ namespace LaptopStoreRefactorDb.Data
 
       LaptopAndStore lsThree = new LaptopAndStore()
       {
-        Id = Guid.NewGuid(),
         Laptop = laptopThree,
         Store = storeOne,
         Quantity = 1
@@ -198,7 +195,6 @@ namespace LaptopStoreRefactorDb.Data
 
       LaptopAndStore lsFour = new LaptopAndStore()
       {
-        Id = Guid.NewGuid(),
         Laptop = laptopFour,
         Store = storeTwo,
         Quantity = 10
@@ -206,7 +202,6 @@ namespace LaptopStoreRefactorDb.Data
 
       LaptopAndStore lsFive = new LaptopAndStore()
       {
-        Id = Guid.NewGuid(),
         Laptop = laptopFive,
         Store = storeTwo,
         Quantity = 5
@@ -214,7 +209,6 @@ namespace LaptopStoreRefactorDb.Data
 
       LaptopAndStore lsSix = new LaptopAndStore()
       {
-        Id = Guid.NewGuid(),
         Laptop = laptopSix,
         Store = storeTwo,
         Quantity = 10
@@ -222,7 +216,6 @@ namespace LaptopStoreRefactorDb.Data
 
       LaptopAndStore lsSeven = new LaptopAndStore()
       {
-        Id = Guid.NewGuid(),
         Laptop = laptopSeven,
         Store = storeThree,
         Quantity = 10
@@ -230,7 +223,6 @@ namespace LaptopStoreRefactorDb.Data
 
       LaptopAndStore lsEight = new LaptopAndStore()
       {
-        Id = Guid.NewGuid(),
         Laptop = laptopEight,
         Store = storeThree,
         Quantity = 5
@@ -238,7 +230,6 @@ namespace LaptopStoreRefactorDb.Data
 
       LaptopAndStore lsNine = new LaptopAndStore()
       {
-        Id = Guid.NewGuid(),
         Laptop = laptopNine,
         Store = storeThree,
         Quantity = 1
