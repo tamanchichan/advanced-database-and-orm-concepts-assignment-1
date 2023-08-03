@@ -1,4 +1,4 @@
-﻿namespace LaptopStoreRefactor.Model
+﻿namespace LaptopStoreRefactorDb.Model
 {
   public class Brand
   {

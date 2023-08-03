@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "LaptopStoreRefactor": {
+    "LaptopStoreRefactorDb": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

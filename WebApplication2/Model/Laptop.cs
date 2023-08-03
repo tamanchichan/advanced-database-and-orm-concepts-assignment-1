@@ -1,10 +1,10 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 
-namespace LaptopStoreRefactor.Model
+namespace LaptopStoreRefactorDb.Model
 {
   public class Laptop
   {
-    public Guid Number { get; set; }
+    public int Id { get; set; }
 
     private string _model;
     public string Model
