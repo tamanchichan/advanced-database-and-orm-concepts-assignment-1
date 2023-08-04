@@ -42,6 +42,8 @@
             "cannot be empty."
             );
         }
+
+        _streetNumber = value;
       }
     }
 
