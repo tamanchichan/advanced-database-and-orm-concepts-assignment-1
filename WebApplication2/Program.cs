@@ -86,4 +86,33 @@ app.MapGet("/laptops/search", (LaptopStoreRefactor db, decimal? amountAbove, dec
   }
 });
 
+app.MapGet("laptops/available", (LaptopStoreRefactor db) =>
+{
+  try
+  {
+    return Results.Ok(db.LaptopsAndStores.Select(ls => new
+    {
+      Laptop = new
+      {
+        Id = ls.LaptopId,
+        Model = ls.Laptop.Model,
+        Brand = ls.Laptop.Brand,
+        Price = ls.Laptop.Price,
+        Condition = ls.Laptop.Condition,
+        Quantity = ls.Quantity
+      },
+      Store = new
+      {
+        Id = ls.StoreId,
+        Street = $"{ls.Store.StreetNumber} {ls.Store.StreetName}",
+        Province = ls.Store.Province,
+      }
+    }).Where(ls => ls.Laptop.Quantity > 0));
+  }
+  catch (Exception ex)
+  {
+    return Results.Problem(ex.Message);
+  }
+});
+
 app.Run();
