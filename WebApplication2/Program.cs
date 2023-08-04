@@ -115,4 +115,34 @@ app.MapGet("laptops/available", (LaptopStoreRefactor db) =>
   }
 });
 
+app.MapPost("laptop/add", (LaptopStoreRefactor db, int quantity, Guid laptopId, Guid storeId) =>
+{
+  try
+  {
+    LaptopAndStore ls = db.LaptopsAndStores.First(ls => ls.LaptopId == laptopId && ls.StoreId == storeId);
+    ls.Quantity += quantity;
+    db.SaveChanges();
+
+    return Results.Ok(new
+    {
+      Laptop = new
+      {
+        Id = ls.LaptopId,
+        Model = ls.Laptop.Model,
+        Quantity = ls.Quantity
+      },
+      Store = new
+      {
+        Id = ls.StoreId,
+        Street = $"{ls.Store.StreetNumber} {ls.Store.StreetName}",
+        Province = ls.Store.Province
+      }
+    });
+  }
+  catch (Exception ex)
+  {
+    return Results.Problem(ex.Message);
+  }
+});
+
 app.Run();
