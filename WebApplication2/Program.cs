@@ -166,4 +166,21 @@ app.MapGet("laptops/get-average-price-by-brand={brandName}", (LaptopStoreRefacto
   }
 });
 
+app.MapGet("/stores", (LaptopStoreRefactor db) =>
+{
+  try
+  {
+    return Results.Ok(db.Stores.Select(s => new
+    {
+      Id = s.Id,
+      Street = $"{s.StreetNumber} {s.StreetName}",
+      Province = s.Province
+    }));
+  }
+  catch (Exception ex)
+  {
+    return Results.Problem(ex.Message);
+  }
+});
+
 app.Run();
