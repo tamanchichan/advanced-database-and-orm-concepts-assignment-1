@@ -145,4 +145,25 @@ app.MapPost("laptop/add", (LaptopStoreRefactor db, int quantity, Guid laptopId, 
   }
 });
 
+app.MapGet("laptops/get-average-price-by-brand={brandName}", (LaptopStoreRefactor db, string brandName) =>
+{
+  try
+  {
+    HashSet<Laptop> laptops = db.Laptops.Where(l => l.Brand.Name == brandName).ToHashSet();
+    int laptopsCount = laptops.Count;
+
+    decimal averagePrice = laptops.Average(l => l.Price);
+
+    return Results.Ok(new
+    {
+      LaptopCount = laptopsCount,
+      AveragePrice = averagePrice
+    });
+  }
+  catch (Exception ex)
+  {
+    return Results.Problem(ex.Message);
+  }
+});
+
 app.Run();
